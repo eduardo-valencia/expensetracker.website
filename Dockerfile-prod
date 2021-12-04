@@ -1,0 +1,10 @@
+FROM nikolaik/python-nodejs
+
+WORKDIR /app
+COPY container/package.json container/yarn.lock container/
+RUN cd container && yarn install
+COPY . .
+RUN cd container && yarn build
+WORKDIR /app/container
+
+CMD ["yarn", "start"]
